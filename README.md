@@ -1,2 +1,2 @@
-# peak
-A project created by [Mitten Development](https://github.com/mittendevelopment) on [LiveCodes](https://livecodes.io).
+# Peak Branding
+A project created by [Strive Systems](https://github.com/mittendevelopment).
