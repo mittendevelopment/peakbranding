@@ -12,19 +12,55 @@ body {
     color: #212121;
     line-height: 1.6;
     font-size: 1rem;
+    scroll-behavior: smooth;
 }
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+
+/* Animations */
+@keyframes fadeIn {
+    0% {opacity: 0; transform: translateY(40px);}
+    100% {opacity: 1; transform: translateY(0);}
 }
-a {
+@keyframes fadeInUp {
+    0% {opacity: 0; transform: translateY(60px);}
+    100% {opacity: 1; transform: translateY(0);}
+}
+.fade-in {
+    animation: fadeIn 1.2s cubic-bezier(.17,.67,.83,.67) both;
+}
+.fade-in-up {
+    animation: fadeInUp 1.2s cubic-bezier(.17,.67,.83,.67) both;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(90deg, #1d72b8 20%, #6dd5ed 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.hero-content .highlight {
     color: #1d72b8;
-    text-decoration: none;
-    transition: color 0.2s;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
-a:hover {
-    color: #0a417a;
+
+/* Security Notice Banner */
+.security-notice {
+    width: 100%;
+    background: #eef6fa;
+    color: #1d72b8;
+    font-size: 0.97rem;
+    text-align: center;
+    padding: 8px 0 6px 0;
+    letter-spacing: 0.1px;
+    font-weight: 500;
+    border-bottom: 1px solid #e2eaf2;
+    z-index: 1001;
+    position: relative;
+}
+.security-notice strong {
+    font-weight: 700;
+    color: #1569b2;
 }
 
 /* Container */
@@ -40,7 +76,9 @@ a:hover {
     border-bottom: 1.5px solid #ececec;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
+    box-shadow: 0 3px 12px rgba(29,114,184,0.03);
+    transition: box-shadow 0.2s;
 }
 .nav-container {
     display: flex;
@@ -49,10 +87,21 @@ a:hover {
     height: 64px;
 }
 .logo {
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: #212121;
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: #1d72b8;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', Arial, sans-serif;
+}
+.logo-peak {
+    font-size: 1.2em;
+    color: #6dd5ed;
+    font-weight: 900;
+    margin-right: 4px;
+    transform: translateY(-2px);
 }
 .nav-links {
     display: flex;
@@ -63,63 +112,116 @@ a:hover {
     font-weight: 500;
     padding: 6px 2px;
     border-bottom: 2px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, color 0.2s;
+    color: #222;
+    font-size: 1.04rem;
+    letter-spacing: 0.1px;
+    position: relative;
 }
 .nav-links li a:hover, .nav-links li a.active {
     border-bottom: 2px solid #1d72b8;
+    color: #1d72b8;
 }
 .nav-toggle {
     display: none;
-    font-size: 2rem;
+    flex-direction: column;
+    gap: 4px;
     background: none;
     border: none;
     cursor: pointer;
-    color: #212121;
+    margin-left: 18px;
+}
+.burger {
+    width: 26px;
+    height: 3px;
+    background: #1d72b8;
+    border-radius: 2px;
+    display: block;
+    transition: all 0.2s;
 }
 
 /* Hero Section */
 .hero {
     background: linear-gradient(120deg, #1d72b8 0%, #6dd5ed 100%);
     color: #fff;
-    padding: 80px 0 60px 0;
+    padding: 100px 0 80px 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.hero-blob {
+    position: absolute;
+    top: -80px;
+    right: -140px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at 60% 40%, #fff 20%, #6dd5ed 100%);
+    filter: blur(80px);
+    opacity: 0.33;
+    z-index: 0;
+    pointer-events: none;
+}
+.hero-content h1,
+.hero-content .subtitle,
+.hero-content .highlight,
+.hero-content .gradient-text {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .hero-content h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 16px;
-    letter-spacing: -1px;
+    font-size: 2.9rem;
+    font-weight: 900;
+    margin-bottom: 14px;
+    letter-spacing: -1.2px;
+    line-height: 1.15;
+}
+.hero-content .subtitle {
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-top: 2px;
+    display: block;
 }
 .hero-content p {
-    font-size: 1.25rem;
-    margin-bottom: 28px;
-    max-width: 520px;
+    font-size: 1.18rem;
+    margin-bottom: 36px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+    color: #eaf8ff;
+    text-shadow: 0 1px 10px rgba(29,114,184,0.11);
 }
 .cta-btn {
-    background: #fff;
-    color: #1d72b8;
+    background: linear-gradient(90deg, #1d72b8 10%, #6dd5ed 90%);
+    color: #fff;
     font-weight: 700;
     padding: 14px 38px;
-    border-radius: 30px;
-    font-size: 1rem;
+    border-radius: 32px;
+    font-size: 1.07rem;
     border: none;
     cursor: pointer;
-    box-shadow: 0 2px 12px rgba(29,114,184,0.10);
-    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 16px rgba(29,114,184,0.13);
+    transition: background 0.23s, color 0.2s, transform 0.18s;
     text-decoration: none;
     display: inline-block;
+    letter-spacing: 0.2px;
+    outline: none;
 }
-.cta-btn:hover {
-    background: #1d72b8;
+.cta-btn:focus, .cta-btn:hover {
+    background: linear-gradient(90deg, #6dd5ed 10%, #1d72b8 90%);
     color: #fff;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 26px rgba(29,114,184,0.14);
+}
+.hero-btn {
+    font-size: 1.17rem;
+    padding: 16px 48px;
 }
 
 /* Section Headings */
 section h2 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.1rem;
+    font-weight: 900;
     margin-bottom: 20px;
     color: #1d72b8;
     letter-spacing: -0.5px;
@@ -131,11 +233,13 @@ section h2 {
     padding: 60px 0 40px 0;
     background: #fff;
 }
-.about-section p {
+.about-content {
     max-width: 700px;
     margin: 0 auto;
     color: #444;
-    font-size: 1.08rem;
+    font-size: 1.13rem;
+    text-align: center;
+    line-height: 1.7;
 }
 
 /* Showcase */
@@ -149,31 +253,46 @@ section h2 {
     gap: 32px;
     margin-top: 28px;
 }
+.showcase-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.18s, box-shadow 0.18s;
+    border-radius: 14px;
+}
+.showcase-link:focus .showcase-item,
+.showcase-link:hover .showcase-item {
+    box-shadow: 0 12px 32px rgba(29,114,184,0.17);
+    transform: translateY(-4px) scale(1.032);
+}
 .showcase-item {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(29,114,184,0.06);
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(29,114,184,0.08);
     overflow: hidden;
-    padding: 0 0 18px 0;
+    padding: 0 0 22px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: box-shadow 0.2s;
-}
-.showcase-item:hover {
-    box-shadow: 0 6px 22px rgba(29,114,184,0.13);
+    transition: box-shadow 0.2s, transform 0.17s;
 }
 .showcase-item img {
     width: 100%;
     height: 170px;
     object-fit: cover;
-    border-radius: 12px 12px 0 0;
+    border-radius: 14px 14px 0 0;
+    transition: filter 0.23s;
+    background: #eaf8ff;
+}
+.showcase-link:hover .showcase-item img {
+    filter: brightness(1.06) saturate(1.1);
 }
 .showcase-item h3 {
-    font-size: 1.13rem;
-    font-weight: 600;
-    margin: 18px 0 8px 0;
+    font-size: 1.16rem;
+    font-weight: 700;
+    margin: 20px 0 8px 0;
     text-align: center;
+    color: #1d72b8;
 }
 .showcase-item p {
     font-size: 1rem;
@@ -181,7 +300,7 @@ section h2 {
     text-align: center;
 }
 .showcase-note {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     text-align: center;
     margin-top: 18px;
     color: #aaa;
@@ -194,7 +313,7 @@ section h2 {
 }
 .testimonials-grid {
     display: flex;
-    gap: 24px;
+    gap: 32px;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 24px;
@@ -202,56 +321,65 @@ section h2 {
 blockquote {
     background: #f5f7fa;
     border-left: 4px solid #1d72b8;
-    padding: 18px 24px;
-    border-radius: 10px;
-    max-width: 350px;
+    padding: 22px 28px;
+    border-radius: 12px;
+    max-width: 340px;
     font-style: italic;
-    color: #222;
+    color: #212121;
     margin: 0 8px;
-    box-shadow: 0 1px 5px rgba(29,114,184,0.07);
+    box-shadow: 0 2px 10px rgba(29,114,184,0.10);
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.18s;
+}
+blockquote .stars {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #1d72b8;
+    letter-spacing: 2px;
 }
 blockquote cite {
     display: block;
-    margin-top: 12px;
-    font-size: 0.98rem;
-    font-weight: 500;
+    margin-top: 14px;
+    font-size: 1rem;
+    font-weight: 600;
     color: #1d72b8;
 }
 
 /* Discord Invitation */
 .discord-section {
     padding: 60px 0 40px 0;
-    background: linear-gradient(110deg, #ffffff 0%, #ffffff 100%);
-    color: #666666;
+    background: linear-gradient(110deg, #eaf8ff 0%, #fff 100%);
+    color: #212121;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 .discord-btn {
-    background: #141414;
-    color: #ffffff;
+    background: linear-gradient(90deg, #7289da 20%, #1d72b8 100%);
+    color: #fff;
     font-weight: 700;
-    padding: 12px 36px;
-    border-radius: 30px;
+    padding: 14px 38px;
+    border-radius: 32px;
     font-size: 1.08rem;
     border: none;
     cursor: pointer;
     margin-top: 20px;
     display: inline-block;
-    box-shadow: 0 2px 12px rgba(114,137,218,0.10);
-    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 16px rgba(114,137,218,0.14);
+    transition: background 0.22s, color 0.2s, transform 0.18s;
     text-decoration: none;
+    outline: none;
 }
-.discord-btn:hover {
-    background: #7289da;
-    color: #ffffff;
+.discord-btn:focus, .discord-btn:hover {
+    background: linear-gradient(90deg, #1d72b8 10%, #7289da 90%);
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
 }
 .discord-note {
     font-size: 0.92rem;
     color: #9b9b9b;
     margin-top: 14px;
 }
-
-/* Application Center */
-/* ...existing styles... */
 
 /* Application Center */
 .application-section {
@@ -271,9 +399,9 @@ blockquote cite {
     text-align: center;
     width: 100%;
     max-width: 600px;
+    font-size: 1.09rem;
 }
 
-/* ...rest of styles... */
 /* Contact Section */
 .contact-section {
     padding: 60px 0 40px 0;
@@ -325,6 +453,9 @@ blockquote cite {
 }
 
 /* Responsive Design */
+@media (max-width: 1080px) {
+    .container { max-width: 98vw; }
+}
 @media (max-width: 900px) {
     .showcase-grid, .testimonials-grid {
         grid-template-columns: 1fr;
@@ -334,10 +465,10 @@ blockquote cite {
 }
 @media (max-width: 700px) {
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 2.1rem;
     }
     .container {
-        width: 96%;
+        width: 98%;
     }
     .nav-links {
         gap: 1.2rem;
@@ -355,12 +486,13 @@ blockquote cite {
         right: 0;
         background: #fff;
         flex-direction: column;
-        width: 190px;
-        box-shadow: 0 4px 16px rgba(29,114,184,0.06);
+        width: 200px;
+        box-shadow: 0 4px 16px rgba(29,114,184,0.09);
         display: none;
         z-index: 99;
         border-radius: 0 0 0 12px;
         gap: 0;
+        animation: fadeIn 0.3s;
     }
     .nav-links.open {
         display: flex;
@@ -372,7 +504,7 @@ blockquote cite {
         width: 100%;
     }
     .nav-toggle {
-        display: block;
+        display: flex;
     }
     .showcase-grid {
         grid-template-columns: 1fr;
@@ -382,30 +514,23 @@ blockquote cite {
         gap: 10px;
     }
 }
-.showcase-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: transform 0.14s, box-shadow 0.14s;
-}
-.showcase-link:focus .showcase-item,
-.showcase-link:hover .showcase-item {
-    box-shadow: 0 6px 22px rgba(29,114,184,0.18);
-    transform: translateY(-3px) scale(1.025);
+.showcase-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    margin-top: 32px;
+    margin-bottom: 18px;
+    width: 100%;
 }
 
-.security-notice {
-    width: 100%;
-    background: #eef6fa;
-    color: #1d72b8;
-    font-size: 0.97rem;
-    text-align: center;
-    padding: 8px 0 6px 0;
-    letter-spacing: 0.1px;
-    font-weight: 500;
-    border-bottom: 1px solid #e2eaf2;
-}
-.security-notice strong {
+.showcase-text-link {
+    font-size: 1.18rem;
     font-weight: 700;
-    color: #1569b2;
-}
+    color: #1d72b8;
+    background: #f5f7fa;
+    padding: 18px 36px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(29, 114, 184, 0.10);
+    text-align: center;
+    transition: color 0.2s,

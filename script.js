@@ -1,4 +1,4 @@
-// Mobile Navigation Toggle
+// Mobile Navigation Toggle with smooth animation
 document.getElementById('navToggle').addEventListener('click', function () {
     const navLinks = document.getElementById('navLinks');
     navLinks.classList.toggle('open');
@@ -21,42 +21,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Application Form Handling
-document.getElementById('applicationForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const name = document.getElementById('appName').value.trim();
-    const email = document.getElementById('appEmail').value.trim();
-    const portfolio = document.getElementById('appPortfolio').value.trim();
-    const motivation = document.getElementById('appMotivation').value.trim();
-    const messageEl = document.getElementById('applicationMessage');
-    // Simple validation
-    if (!name || !email || !portfolio || !motivation) {
-        messageEl.textContent = "Please fill in all fields.";
-        messageEl.style.color = "#e74c3c";
-        return;
-    }
-    // Simulate submission
-    messageEl.textContent = "Thank you for applying! We'll review your application soon.";
-    messageEl.style.color = "#1d72b8";
-    this.reset();
-});
+// Optional: Add fade-in on scroll for sections (IntersectionObserver)
+document.addEventListener('DOMContentLoaded', function() {
+    const faders = document.querySelectorAll('.fade-in, .fade-in-up');
+    const appearOptions = {
+        threshold: 0.22,
+        rootMargin: "0px 0px -36px 0px"
+    };
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = "none";
+            appearOnScroll.unobserve(entry.target);
+        });
+    }, appearOptions);
 
-// Contact Form Handling
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const name = document.getElementById('contactName').value.trim();
-    const email = document.getElementById('contactEmail').value.trim();
-    const message = document.getElementById('contactMessage').value.trim();
-    const messageEl = document.getElementById('contactFormMessage');
-    if (!name || !email || !message) {
-        messageEl.textContent = "Please fill in all fields.";
-        messageEl.style.color = "#e74c3c";
-        return;
-    }
-    // Simulate submission
-    messageEl.textContent = "Thank you for reaching out! We'll get back to you soon.";
-    messageEl.style.color = "#1d72b8";
-    this.reset();
+    faders.forEach(fader => {
+        fader.style.opacity = 0;
+        fader.style.transform = fader.classList.contains('fade-in-up') ? 'translateY(60px)' : 'translateY(40px)';
+        appearOnScroll.observe(fader);
+    });
 });
-
-<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
