@@ -96,4 +96,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const menuToggle = document.getElementById('menuToggle');
+const navbar = document.getElementById('navbar');
+
+menuToggle.addEventListener('click', () => {
+    navbar.classList. toggle('active');
+});
+
+// Close menu when a link is clicked
+navbar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        navbar.classList. remove('active');
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.navbar-container')) {
+        navbar.classList.remove('active');
+    }
+});
+
 <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>

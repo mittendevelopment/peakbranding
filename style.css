@@ -778,3 +778,117 @@ blockquote cite {
         grid-template-columns: 1fr;
     }
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+}
+
+header {
+    background-color: #2a2a2a;
+    padding: 1rem 0;
+    border-bottom: 3px solid #5ba3d0;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin:  0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight:  bold;
+    white-space: nowrap;
+}
+
+.menu-toggle {
+    display: none;
+    background:  none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.navbar {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.navbar a:hover {
+    color: #5ba3d0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        background-color: #1a1a1a;
+        padding: 1rem 0;
+        margin-top: 0.5rem;
+        border-top: 1px solid #5ba3d0;
+    }
+
+    .navbar. active {
+        display: flex;
+    }
+
+    .navbar a {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #333;
+        text-align: center;
+    }
+
+    .navbar a:last-child {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    . navbar a {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .menu-toggle {
+        font-size: 1.3rem;
+    }
+}
